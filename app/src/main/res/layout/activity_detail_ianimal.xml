@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.DetailIAnimalActivity">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <ImageView
+          android:id="@+id/img_detail"
+          android:layout_width="match_parent"
+          android:layout_height="200dp"
+          android:padding="10dp"
+          android:scaleType="centerCrop"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="1.0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+      <TextView
+          app:layout_constraintHorizontal_weight="3"
+          android:id="@+id/nameAnimal"
+          android:layout_width="0dp"
+          android:layout_height="50dp"
+          android:ellipsize="end"
+          android:gravity="center|left"
+          android:textSize="18sp"
+          app:layout_constraintBottom_toBottomOf="@+id/textView"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.5"
+          app:layout_constraintStart_toEndOf="@+id/textView"
+          app:layout_constraintTop_toTopOf="@+id/textView" />
+
+      <TextView
+          app:layout_constraintHorizontal_weight="3"
+          android:id="@+id/ageAnimal"
+          android:layout_width="0dp"
+          android:layout_height="50dp"
+          android:ellipsize="end"
+          android:gravity="center|left"
+          android:textSize="18sp"
+          app:layout_constraintBottom_toBottomOf="@+id/textView2"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.5"
+          app:layout_constraintStart_toEndOf="@+id/textView2"
+          app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+      <TextView
+          app:layout_constraintHorizontal_weight="3"
+          android:id="@+id/sizeAnimal"
+          android:layout_width="0dp"
+          android:layout_height="50dp"
+          android:ellipsize="end"
+          android:gravity="center|left"
+          android:textSize="18sp"
+          app:layout_constraintBottom_toBottomOf="@+id/textView3"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.5"
+          app:layout_constraintStart_toEndOf="@+id/textView3"
+          app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+      <androidx.appcompat.widget.Toolbar
+          android:id="@+id/toolbar"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:background="?attr/colorPrimary"
+          android:minHeight="?attr/actionBarSize"
+          android:theme="@style/ThemeOverlay.AppCompat.Light"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:titleTextColor="@android:color/white" />
+
+      <TextView
+          android:id="@+id/textView"
+          android:layout_width="0dp"
+          android:layout_height="50dp"
+          android:layout_marginTop="16dp"
+          android:gravity="center|left"
+          android:paddingLeft="16dp"
+          android:text="@string/name_Animal"
+          app:layout_constraintEnd_toStartOf="@+id/nameAnimal"
+          app:layout_constraintHorizontal_bias="0.5"
+          app:layout_constraintHorizontal_weight="1"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+      <TextView
+          android:id="@+id/textView2"
+          android:layout_width="0dp"
+          android:layout_height="50dp"
+          android:layout_marginTop="16dp"
+          android:gravity="center|left"
+          android:paddingLeft="16dp"
+          android:text="@string/age_animal"
+          app:layout_constraintEnd_toStartOf="@+id/ageAnimal"
+          app:layout_constraintHorizontal_bias="0.5"
+          app:layout_constraintHorizontal_weight="1"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+      <TextView
+          android:id="@+id/textView3"
+          android:layout_width="0dp"
+          android:layout_height="50dp"
+          android:layout_marginTop="16dp"
+          android:gravity="center|left"
+          android:paddingLeft="16dp"
+          android:text="@string/size_Animal"
+          app:layout_constraintEnd_toStartOf="@+id/sizeAnimal"
+          app:layout_constraintHorizontal_bias="0.5"
+          app:layout_constraintHorizontal_weight="1"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+      <CheckBox
+          android:id="@+id/checkBox"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="8dp"
+          android:layout_marginLeft="8dp"
+          android:layout_marginTop="16dp"
+          android:layout_marginEnd="8dp"
+          android:layout_marginRight="8dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/img_detail" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

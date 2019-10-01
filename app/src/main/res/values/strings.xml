@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Animal</string>
+    <string name="favoriteAnimals">Favorite Animals</string>
+    <string name="bird">Bird</string>
+    <string name="fish">Fish</string>
+    <string name="mammalia">Mammalia</string>
+    <string name="reptilia">Reptilia</string>
+    <string name="detail_image">Detail Image</string>
+    <string name="name_Animal">Name :</string>
+    <string name="age_animal">Age :</string>
+    <string name="size_Animal">Size :</string>
+</resources>
