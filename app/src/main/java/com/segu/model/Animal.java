@@ -1,66 +1,76 @@
 package com.segu.model;
 
-import android.widget.Toast;
+public class Animal {
 
-import androidx.appcompat.app.AppCompatActivity;
+    private int  mAge, id, favourite;
+    private String mName, mSpecies, mImage,mSize;
 
-public abstract class Animal {
-    protected String species = "Động vật";
-    protected String name;
-    protected int age;
-    protected String size;
-    protected String image;
-
-    public Animal(String name, String image) {
-        this.name = name;
-        this.image = image;
+    public Animal(int mAge, int favourite, String mName, String mSpecies, String mImage, String mSize) {
+        this.mAge = mAge;
+        this.favourite = favourite;
+        this.mName = mName;
+        this.mSpecies = mSpecies;
+        this.mImage = mImage;
+        this.mSize = mSize;
     }
 
-    public Animal(String name, int age, String size, String image) {
-        this.name = name;
-        this.age = age;
-        this.size = size;
-        this.image = image;
+    public Animal() {
+
     }
 
-    public abstract void eat();
-
-    public abstract void move();
-
-    public abstract void sound();
-
-    public void sleep() {
+    public int getmAge() {
+        return mAge;
     }
 
-    public String getName() {
-        return name;
+    public void setmAge(int mAge) {
+        this.mAge = mAge;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public int getId() {
+        return id;
     }
 
-    public int getAge() {
-        return age;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public int getFavourite() {
+        return favourite;
     }
 
-    public String getSize() {
-        return size;
+    public void setFavourite(int favourite) {
+        this.favourite = favourite;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public String getmName() {
+        return mName;
     }
 
-    public String getImage() {
-        return image;
+    public void setmName(String mName) {
+        this.mName = mName;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public String getmSpecies() {
+        return mSpecies;
+    }
+
+    public void setmSpecies(String mSpecies) {
+        this.mSpecies = mSpecies;
+    }
+
+    public String getmImage() {
+        return mImage;
+    }
+
+    public void setmImage(String mImage) {
+        this.mImage = mImage;
+    }
+
+    public String getmSize() {
+        return mSize;
+    }
+
+    public void setmSize(String mSize) {
+        this.mSize = mSize;
     }
 }
