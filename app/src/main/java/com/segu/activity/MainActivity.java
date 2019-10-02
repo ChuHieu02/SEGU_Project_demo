@@ -1,5 +1,8 @@
 package com.segu.activity;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -17,6 +20,7 @@ import com.segu.model.AnimalBanner;
 import com.segu.model.AnimalSpecies;
 import com.segu.network.ApiService;
 import com.segu.network.RetrofitClient;
+import com.segu.utils.ConnectionReceiver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         mappingImageSpecies();
         rcSlideImage = findViewById(R.id.rc_slide_image);
         rc_list_banner_image = findViewById(R.id.rc_list_banner_image);
-        createSlideImage();
 
         LinearLayoutManager ln_slide_image = new LinearLayoutManager(this);
         ln_slide_image.setOrientation(RecyclerView.HORIZONTAL);
@@ -57,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         rcSlideImage.setAdapter(bannerImageAdapter);
 
         addDataAnimalBanner();
-
 
         LinearLayoutManager ln_animal_species = new LinearLayoutManager(this);
         ln_animal_species.setOrientation(RecyclerView.VERTICAL);
@@ -69,7 +71,17 @@ public class MainActivity extends AppCompatActivity {
 
         onClickAnimalSpecies();
 
+        checkNetWork();
 
+
+
+    }
+
+    private void checkNetWork() {
+        boolean ret = ConnectionReceiver.isConnected();
+        if (ret != true) {
+            Toast.makeText(this, "Vui lòng kiểm tra kết nối mạng", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -127,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     private void mappingImageSpecies() {
 
 
@@ -136,6 +147,16 @@ public class MainActivity extends AppCompatActivity {
 //        Glide.with(this).load("https://www.sccpre.cat/mypng/detail/26-266008_tiger-png-transparent-background-tiger-png.png").placeholder(R.drawable.loading_image).into(img_mammaliaSpecies);
 //        Glide.with(this).load("https://clipartion.com/wp-content/uploads/2015/11/green-iguana-common-iguana-clipart-graphics-free-clip-art.jpg").placeholder(R.drawable.loading_image).into(img_reptileSpecies);
 //        Glide.with(this).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0AFFswcHV8SK4T0CLhpijA4WOzVpINrU1G5yiJ2Wh1FoVgWLj").placeholder(R.drawable.loading_image).into(img_favoriteAnimalsSpecies);
+    }
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = null;
+        if (cm != null) {
+            activeNetwork = cm.getActiveNetworkInfo();
+        }
+
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 
 

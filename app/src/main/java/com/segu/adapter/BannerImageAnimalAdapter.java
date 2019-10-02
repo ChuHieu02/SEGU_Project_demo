@@ -49,6 +49,7 @@ public class BannerImageAnimalAdapter extends RecyclerView.Adapter<BannerImageAn
         Glide.with(context)
                 .load(animal.getBanner())
                 .placeholder(R.drawable.loading_image)
+                .error(R.drawable.img_err)
                 .into(holder.mImgAnimal);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

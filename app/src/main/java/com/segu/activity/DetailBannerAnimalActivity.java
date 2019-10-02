@@ -20,20 +20,9 @@ import com.bumptech.glide.Glide;
 import com.segu.R;
 import com.segu.data.DBQuerys;
 import com.segu.model.DetailAnimalBanner;
-import com.segu.network.ApiService;
-import com.segu.network.RetrofitClient;
-import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class DetailBannerAnimalActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -113,6 +102,7 @@ public class DetailBannerAnimalActivity extends AppCompatActivity {
                             Glide.with(getApplicationContext())
                                     .load(jsonObject.getString("img_url"))
                                     .placeholder(R.drawable.loading_image)
+                                    .error(R.drawable.img_err)
                                     .into(ImgDetailBannerAnimal);
 
                         } catch (JSONException e) {

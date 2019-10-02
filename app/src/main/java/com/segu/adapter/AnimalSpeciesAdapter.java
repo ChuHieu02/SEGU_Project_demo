@@ -1,6 +1,7 @@
 package com.segu.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.segu.R;
+import com.segu.activity.DetailAnimalSpeciesActivity;
+import com.segu.activity.DetailBannerAnimalActivity;
 import com.segu.model.AnimalSpecies;
 
 import java.util.List;
@@ -42,12 +45,16 @@ public class AnimalSpeciesAdapter extends RecyclerView.Adapter<AnimalSpeciesAdap
 
     @Override
     public void onBindViewHolder(@NonNull AnimalSpeciesHolder holder, final int position) {
-        AnimalSpecies animalSpecies = animalSpeciesList.get(position);
+        final AnimalSpecies animalSpecies = animalSpeciesList.get(position);
         holder.tvAnimalSpecies.setText(animalSpecies.getName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onclickAnimalSpecies.onClick(position);
+                Intent intent = new Intent(context, DetailAnimalSpeciesActivity.class);
+                intent.putExtra("id", String.valueOf(animalSpecies.getSpeciesId()));
+
+                context.startActivity(intent);
+
             }
         });
 

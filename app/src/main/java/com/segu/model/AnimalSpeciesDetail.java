@@ -4,7 +4,7 @@ package com.segu.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DetailAnimalSpecies {
+public class AnimalSpeciesDetail {
 
     @SerializedName("animal_id")
     @Expose
@@ -21,6 +21,16 @@ public class DetailAnimalSpecies {
     @SerializedName("img_url")
     @Expose
     private String imgUrl;
+
+    public AnimalSpeciesDetail(String name, String size, String imgUrl) {
+        this.name = name;
+        this.size = size;
+        this.imgUrl = imgUrl;
+    }
+
+    public AnimalSpeciesDetail() {
+
+    }
 
     public Integer getAnimalId() {
         return animalId;
@@ -62,4 +72,14 @@ public class DetailAnimalSpecies {
         this.imgUrl = imgUrl;
     }
 
+    @Override
+    public String toString() {
+        return "AnimalSpeciesDetail{" +
+                "animalId=" + animalId +
+                ", species=" + species +
+                ", name='" + name + '\'' +
+                ", size='" + size + '\'' +
+                ", imgUrl='" + imgUrl + '\'' +
+                '}';
+    }
 }

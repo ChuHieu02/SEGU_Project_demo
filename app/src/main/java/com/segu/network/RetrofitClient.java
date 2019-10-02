@@ -26,9 +26,6 @@ public class RetrofitClient {
         }
         return retrofit;
     }
-    //    Retrofit retrofit = RetrofitClient.getRetrofitClient();
-//    Service apiService = retrofit.create(Service.class);
-//
-//    Call<List<CategoryResponse>> call = apiService.getProduct("Bearer " + LoginActivity.token, category);
+
 
 }
