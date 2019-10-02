@@ -3,8 +3,10 @@ package com.segu.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Adapter;
 import android.widget.Toast;
@@ -31,75 +33,101 @@ import java.util.List;
 
 public class DetailAnimalSpeciesActivity extends AppCompatActivity {
     private RecyclerView rcListDetailAnimalSpecies;
-    private List<AnimalSpeciesDetail> animalSpeciesList ;
+    private List<AnimalSpeciesDetail> animalSpeciesList;
     private String speciesID = "73";
     private DetailAnimalSpeciesAdapter detailAnimalSpeciesAdapter;
+    private SwipeRefreshLayout swipeDetailAnimalSpecies;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_animal_species);
+
         animalSpeciesList = new ArrayList<>();
+        Intent intent = getIntent();
         mapping();
+        if (intent.getStringExtra("id").equals("1")) {
+            speciesID = "72";
+        }else if (intent.getStringExtra("id").equals("2")){
+            speciesID = "73";
+        }
+        else if (intent.getStringExtra("id").equals("3")){
+            speciesID = "75";
+        }
+        else if (intent.getStringExtra("id").equals("4")){
+            speciesID = "74";
+        }
         addDataAnimalSpecies();
+
+        swipeDetailAnimalSpecies.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                detailAnimalSpeciesAdapter.delete();
+                rcListDetailAnimalSpecies.removeAllViewsInLayout();
+                addDataAnimalSpecies();
+
+            }
+        });
+
 
 
     }
 
     private void addDataAnimalSpecies() {
 
+        String queryUrl = "http://git.segu.vn:89/snippets/" + speciesID + "/raw";
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, queryUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            JSONArray jsonArrayList = new JSONArray(response);
+                            for (int i = 0; i < jsonArrayList.length(); i++) {
+                                JSONObject jsonObjectList = jsonArrayList.getJSONObject(i);
+                                String name = jsonObjectList.getString("name");
+                                String size = jsonObjectList.getString("size");
+                                String img_url = jsonObjectList.getString("img_url");
+                                // Toast.makeText(DetailAnimalSpeciesActivity.this, ""+jsonArrayList.toString(), Toast.LENGTH_SHORT).show();
+
+                                animalSpeciesList.add(new AnimalSpeciesDetail(name, size, img_url));
 
 
-//        String queryUrl = "http://git.segu.vn:89/snippets/73/raw";
-//        RequestQueue requestQueue = Volley.newRequestQueue(this);
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, queryUrl,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//
-//                        try {
-//                            JSONObject jsonObject = new JSONObject(response);
-//
-//                            JSONArray jsonArrayList = jsonObject.getJSONArray(response);
-//                            for (int i = 0; i < jsonArrayList.length(); i++) {
-//                                JSONObject jsonObjectList = jsonArrayList.getJSONObject(i);
-//                                String name = jsonObjectList.getString("name");
-//                                String size = jsonObjectList.getString("size");
-//                                String img_url = jsonObjectList.getString("img_url");
-//                                Toast.makeText(DetailAnimalSpeciesActivity.this, ""+jsonArrayList.toString(), Toast.LENGTH_SHORT).show();
-//
-//                                animalSpeciesList.add(new AnimalSpeciesDetail(name , size , img_url));
-//
-//
-//                            }
-//                            detailAnimalSpeciesAdapter.notifyDataSetChanged();
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(getParent(), "Error No Data", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//        requestQueue.add(stringRequest);
+                            }
+                            detailAnimalSpeciesAdapter.notifyDataSetChanged();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        swipeDetailAnimalSpecies.setRefreshing(false);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        swipeDetailAnimalSpecies.setRefreshing(false);
+                        Toast.makeText(getParent(), "Error No Data", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        requestQueue.add(stringRequest);
 
 
     }
 
-            private void mapping() {
-                rcListDetailAnimalSpecies =findViewById(R.id.rc_list_detail_animalSpecies);
+    private void mapping() {
+        swipeDetailAnimalSpecies = (SwipeRefreshLayout) findViewById(R.id.swipe_detail_animal_species);
+        rcListDetailAnimalSpecies = findViewById(R.id.rc_list_detail_animalSpecies);
 
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-                rcListDetailAnimalSpecies.setLayoutManager(linearLayoutManager);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        rcListDetailAnimalSpecies.setLayoutManager(linearLayoutManager);
 
-                detailAnimalSpeciesAdapter = new DetailAnimalSpeciesAdapter(this,animalSpeciesList);
-                rcListDetailAnimalSpecies.setAdapter(detailAnimalSpeciesAdapter);
+        detailAnimalSpeciesAdapter = new DetailAnimalSpeciesAdapter(this, animalSpeciesList);
+        rcListDetailAnimalSpecies.setAdapter(detailAnimalSpeciesAdapter);
 
 
-            }
-        }
+    }
+}

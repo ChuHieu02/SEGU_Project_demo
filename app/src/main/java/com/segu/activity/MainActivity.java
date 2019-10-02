@@ -48,8 +48,10 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (!isNetworkAvailable(this)){
+            Toast.makeText(this, "vui lòng kiểm tra kết nối mạng", Toast.LENGTH_SHORT).show();
+        }
 
-        mappingImageSpecies();
         rcSlideImage = findViewById(R.id.rc_slide_image);
         rc_list_banner_image = findViewById(R.id.rc_list_banner_image);
 
@@ -69,21 +71,9 @@ public class MainActivity extends AppCompatActivity {
 
         addDataAnimalSpecies();
 
-        onClickAnimalSpecies();
-
-        checkNetWork();
-
-
 
     }
 
-    private void checkNetWork() {
-        boolean ret = ConnectionReceiver.isConnected();
-        if (ret != true) {
-            Toast.makeText(this, "Vui lòng kiểm tra kết nối mạng", Toast.LENGTH_SHORT).show();
-        }
-
-    }
 
     private void addDataAnimalBanner() {
         Retrofit retrofit = RetrofitClient.getRetrofitClient();
@@ -93,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<AnimalBanner>>() {
             @Override
             public void onResponse(Call<List<AnimalBanner>> call, Response<List<AnimalBanner>> response) {
-                if (response.isSuccessful()){
-                    if (response.body()!=null){
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
                         animalbannerLList.addAll(response.body());
                         bannerImageAdapter.notifyDataSetChanged();
                     }
@@ -108,16 +98,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void onClickAnimalSpecies() {
-        animalSpeciesAdapter.setOnclickAnimalSpecies(new AnimalSpeciesAdapter.OnclickAnimalSpecies() {
-            @Override
-            public void onClick(int position) {
-                AnimalSpecies animalSpecies = animalSpicesList.get(position);
-                Toast.makeText(MainActivity.this, ""+animalSpecies.getSpeciesId(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
     private void addDataAnimalSpecies() {
         Retrofit retrofit = RetrofitClient.getRetrofitClient();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -126,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<AnimalSpecies>>() {
             @Override
             public void onResponse(Call<List<AnimalSpecies>> call, Response<List<AnimalSpecies>> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     animalSpicesList.addAll(response.body());
                     animalSpeciesAdapter.notifyDataSetChanged();
                 }
@@ -141,22 +121,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void mappingImageSpecies() {
 
-
 //        Glide.with(this).load("https://s3.pixers.pics/pixers/700/FO/10/43/88/97/6/700_FO104388976_80ccb49a7104c4f3c42bb66ed8736553.jpg").placeholder(R.drawable.loading_image).into(img_birdSpecies);
 //        Glide.with(this).load("https://media.giphy.com/media/oNZ7uxuxr4ZohOUVpM/giphy.gif").into(img_fishSpecies);
 //        Glide.with(this).load("https://www.sccpre.cat/mypng/detail/26-266008_tiger-png-transparent-background-tiger-png.png").placeholder(R.drawable.loading_image).into(img_mammaliaSpecies);
 //        Glide.with(this).load("https://clipartion.com/wp-content/uploads/2015/11/green-iguana-common-iguana-clipart-graphics-free-clip-art.jpg").placeholder(R.drawable.loading_image).into(img_reptileSpecies);
 //        Glide.with(this).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0AFFswcHV8SK4T0CLhpijA4WOzVpINrU1G5yiJ2Wh1FoVgWLj").placeholder(R.drawable.loading_image).into(img_favoriteAnimalsSpecies);
     }
-    public static boolean isNetworkConnected(Context context) {
-        ConnectivityManager cm =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = null;
-        if (cm != null) {
-            activeNetwork = cm.getActiveNetworkInfo();
-        }
 
-        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 

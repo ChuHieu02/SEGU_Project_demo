@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,15 +22,6 @@ import java.util.List;
 public class AnimalSpeciesAdapter extends RecyclerView.Adapter<AnimalSpeciesAdapter.AnimalSpeciesHolder> {
     private Context context;
     List<AnimalSpecies> animalSpeciesList;
-    private OnclickAnimalSpecies onclickAnimalSpecies;
-
-    public interface OnclickAnimalSpecies {
-        void onClick(int position);
-    }
-
-    public void setOnclickAnimalSpecies(OnclickAnimalSpecies onclickAnimalSpecies) {
-        this.onclickAnimalSpecies = onclickAnimalSpecies;
-    }
 
     public AnimalSpeciesAdapter(Context context, List<AnimalSpecies> animalSpeciesList) {
         this.context = context;
@@ -52,7 +44,6 @@ public class AnimalSpeciesAdapter extends RecyclerView.Adapter<AnimalSpeciesAdap
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailAnimalSpeciesActivity.class);
                 intent.putExtra("id", String.valueOf(animalSpecies.getSpeciesId()));
-
                 context.startActivity(intent);
 
             }

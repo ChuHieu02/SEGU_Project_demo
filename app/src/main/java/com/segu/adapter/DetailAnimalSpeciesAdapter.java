@@ -58,4 +58,8 @@ public class DetailAnimalSpeciesAdapter extends RecyclerView.Adapter<DetailAnima
             txtSize = (TextView) itemView.findViewById(R.id.txtSize);
         }
     }
+    public void delete() {
+        this.animalDetailSpeciesList.clear();
+        notifyDataSetChanged();
+    }
 }
