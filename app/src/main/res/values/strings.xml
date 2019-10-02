@@ -9,4 +9,6 @@
     <string name="name_Animal">Name :</string>
     <string name="age_animal">Age :</string>
     <string name="size_Animal">Size :</string>
+    <string name="err">Lỗi xảy ra</string>
+    <string name="spices_animal">Species</string>
 </resources>

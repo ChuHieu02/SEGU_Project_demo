@@ -6,21 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.segu.R;
-import com.segu.activity.DetailIAnimalActivity;
-import com.segu.model.Animal;
+import com.segu.activity.DetailBannerAnimalActivity;
+import com.segu.model.AnimalBanner;
 
 import java.util.List;
 
-public class SlideImageAdapter extends RecyclerView.Adapter<SlideImageAdapter.SlideImageHolder> {
+public class BannerImageAnimalAdapter extends RecyclerView.Adapter<BannerImageAnimalAdapter.SlideImageHolder> {
     private Context context;
-    private List<Animal> animalList;
+    private List<AnimalBanner> animalList;
     private AnimalSpecies animalSpecies;
 
     public interface AnimalSpecies {
@@ -31,7 +30,7 @@ public class SlideImageAdapter extends RecyclerView.Adapter<SlideImageAdapter.Sl
         this.animalSpecies = animalSpecies;
     }
 
-    public SlideImageAdapter(Context context, List<Animal> animalList) {
+    public BannerImageAnimalAdapter(Context context, List<AnimalBanner> animalList) {
         this.context = context;
         this.animalList = animalList;
     }
@@ -46,22 +45,18 @@ public class SlideImageAdapter extends RecyclerView.Adapter<SlideImageAdapter.Sl
     @Override
     public void onBindViewHolder(@NonNull final SlideImageHolder holder, int position) {
 
-        final Animal animal = animalList.get(position);
+        final AnimalBanner animal = animalList.get(position);
         Glide.with(context)
-                .load(animal.getmImage())
+                .load(animal.getBanner())
                 .placeholder(R.drawable.loading_image)
                 .into(holder.mImgAnimal);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, DetailIAnimalActivity.class);
-                intent.putExtra("name", animal.getmName());
-                intent.putExtra("image", animal.getmImage());
-                intent.putExtra("age", String.valueOf(animal.getmAge()));
-                intent.putExtra("size", animal.getmSize());
-                intent.putExtra("favourite", String.valueOf(animal.getFavourite()));
-                intent.putExtra("id", String.valueOf(animal.getId()));
+                Intent intent = new Intent(context, DetailBannerAnimalActivity.class);
+                intent.putExtra("id", String.valueOf(animal.getAnimalId()));
+
                 context.startActivity(intent);
 
             }

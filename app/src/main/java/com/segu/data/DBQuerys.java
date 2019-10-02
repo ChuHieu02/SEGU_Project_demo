@@ -76,13 +76,40 @@ public class DBQuerys {
         }
         return animals;
     }
-    public void updateAnimal(Animal animal) {
+    public void updateAnimal(String id , String favourite) {
         ContentValues values = new ContentValues();
-        values.put(DBQuerys.ID, animal.getId());
-        values.put(DBQuerys.FAVOURITE, animal.getFavourite());
+        values.put(DBQuerys.ID, id);
+        values.put(DBQuerys.FAVOURITE, favourite);
 
-        db.update(DBQuerys.TABLE_NAME, values, DBQuerys.ID + " = ?", new String[]{String.valueOf(animal.getId())});
+        db.update(DBQuerys.TABLE_NAME, values, DBQuerys.ID + " = ?", new String[]{String.valueOf(id)});
         db.close();
     }
 
+//    public List<Animal> selectFavoriteAnimal(int favorite) {
+//        List<Animal> animals = new ArrayList<Animal>();
+//        // Select All Query
+//        String selectQuery = "SELECT  * FROM " + DBQuerys.TABLE_NAME + " WHERE " + DBQuerys.FAVOURITE + " = '" + favorite + "'";
+//
+//        if (db == null) {
+//            return animals;
+//        }
+//        Cursor cursor = db.rawQuery(selectQuery, null);
+//
+//        // Duyệt trên con trỏ, và thêm vào danh sách.
+//        if (cursor != null && cursor.moveToFirst()) {
+//            do {
+//                Animal animal = new Animal();
+//                animal.setId(cursor.getInt(0));
+//                animal.setmImage(cursor.getInt(1));
+//                animal.setmAge(cursor.getInt(2));
+//                animal.setmSize(cursor.getInt(3));
+//                animal.setmName(cursor.getString(4));
+//                animal.setmSpecies(cursor.getString(5));
+//
+//                // Thêm vào danh sách.
+//                animals.add(animal);
+//            } while (cursor.moveToNext());
+//        }
+//        return animals;
+//
 }

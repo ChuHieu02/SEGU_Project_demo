@@ -11,8 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.BirdActivity"></activity>
-        <activity android:name=".activity.DetailIAnimalActivity" />
+        <activity android:name=".activity.AnimalSpeciesActivity"></activity>
+        <activity android:name=".activity.BirdActivity" />
+        <activity android:name=".activity.DetailBannerAnimalActivity" />
         <activity android:name=".activity.MammaliaActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
